@@ -21,7 +21,7 @@ function executeWithNamedParameters(\mysqli $conn, string $sql, array $namedValu
                 $listValuesTypes .= 'i';
             } else if (is_double($value)) {
                 $listValuesTypes .= 'd';
-            } else if (is_string($value)) {
+            } else {
                 $listValuesTypes .= 's';
             }
 
@@ -36,8 +36,6 @@ function executeWithNamedParameters(\mysqli $conn, string $sql, array $namedValu
     }
 
     $stmt->bind_param($listValuesTypes, ...$listValues);
-
-
 
     if (!$stmt->execute()) {
         return false;
