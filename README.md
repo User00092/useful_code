@@ -85,3 +85,52 @@ if ($encryptedDataWithIV !== null) {
 }
 ```
 
+
+
+### [ PHP CSRF Protection Class](https://github.com/User00092/useful_code/blob/2dd69cec39e4b89a76c5eb403a2ebef28d86a0a1/php/CSRFProtection.php)
+
+```php
+new AES256();
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `config` | `array` | specify data used in the CSRF class |
+
+##### Example:
+```php
+$config = [
+    'session_key' => 'custom_csrf_token', // Optional: Customize session key
+    'token_name' => '_custom_csrf',       // Optional: Customize token name
+    'expiration' => 600,                  // Optional: Customize token expiration time (in seconds)
+];
+
+$csrfProtection = new CSRFProtection($config);
+
+// Generate and retrieve CSRF token
+$token = $csrfProtection->generateToken();
+echo "Generated Token: $token\n";
+
+// Get the current CSRF token
+$currentToken = $csrfProtection->getToken();
+echo "Current Token: $currentToken\n";
+
+// Validate a submitted token
+$submittedToken = $_POST['custom_csrf_token'] ?? '';
+if ($csrfProtection->validateToken($submittedToken)) {
+    echo "Token is valid.\n";
+} else {
+    echo "Token is invalid or expired.\n";
+}
+
+// Get the CSRF token as a hidden input field for a form
+$formTokenField = $csrfProtection->getTokenField();
+echo "Form Token Field: $formTokenField\n";
+
+// Get the CSRF token as a meta tag for use in HTML headers
+$metaTokenTag = $csrfProtection->getTokenMeta();
+echo "Meta Token Tag: $metaTokenTag\n";
+
+```
+
+
