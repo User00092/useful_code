@@ -23,3 +23,65 @@ $accountQuery = executeWithNamedParameters($conn, "SELECT * FROM table WHERE ema
     ":email" => "name@company.com"
 ]);
 ```
+
+
+
+### [PHP AES-256 Encryption and Decryption Class](https://github.com/User00092/useful_code/blob/fed3b7b2d40730dd69252948bf7653188dd67458/php/AES256.php)
+
+```php
+new AES256();
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `key` | `string` | **Required**. the key to be used for encryption and decryption |
+
+##### Example:
+```php
+// Example key (32 bytes)
+$key = 'abcdefghijklmnopqrstuvwxys012345';
+
+// Create an instance of the AES256 class
+$aes256 = new AES256($key);
+
+// Example plaintext
+$plaintext = 'This is a secret message.';
+
+// Encrypt with random nonce
+$encryptedData = $aes256->encrypt($plaintext);
+
+if ($encryptedData !== null) {
+    echo "Encrypted Data: $encryptedData\n";
+
+    // Decrypt the data
+    $decryptedData = $aes256->decrypt($encryptedData);
+
+    if ($decryptedData !== null) {
+        echo "Decrypted Data: $decryptedData\n";
+    } else {
+        echo "Decryption failed.\n";
+    }
+} else {
+    echo "Encryption failed.\n";
+}
+
+// Encrypt with specified nonce
+$customNonce = base64_encode(random_bytes(AES256::AES256_NONCE_SIZE));
+$encryptedDataWithIV = $aes256->encryptWithIV($plaintext, $customNonce);
+
+if ($encryptedDataWithIV !== null) {
+    echo "\nEncrypted Data with Custom Nonce: $encryptedDataWithIV\n";
+
+    // Decrypt the data
+    $decryptedDataWithIV = $aes256->decrypt($encryptedDataWithIV);
+
+    if ($decryptedDataWithIV !== null) {
+        echo "Decrypted Data with Custom Nonce: $decryptedDataWithIV\n";
+    } else {
+        echo "Decryption failed.\n";
+    }
+} else {
+    echo "Encryption failed.\n";
+}
+```
+
