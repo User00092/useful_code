@@ -90,7 +90,7 @@ if ($encryptedDataWithIV !== null) {
 ### [ PHP CSRF Protection Class](https://github.com/User00092/useful_code/blob/2dd69cec39e4b89a76c5eb403a2ebef28d86a0a1/php/CSRFProtection.php)
 
 ```php
-new AES256();
+new CSRFProtection();
 ```
 
 | Parameter | Type     | Description                |
