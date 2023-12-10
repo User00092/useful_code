@@ -1,9 +1,27 @@
+function generateUUIDv4() {
+    return sprintf(
+        '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0x0fff) | 0x4000,
+        mt_rand(0, 0x3fff) | 0x8000,
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff)
+    );
+}
+
 class CSRFProtection {
     protected $session_key;
     protected $token_name;
     protected $expiration;
 
     public function __construct($config = []) {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         $this->session_key = $config['session_key'] ?? 'csrf_token';
         $this->token_name = $config['token_name'] ?? '_csrf';
         $this->expiration = $config['expiration'] ?? 400;
@@ -30,7 +48,7 @@ class CSRFProtection {
         if ($_SESSION[$this->session_key] !== $token) {
             return false;
         }
-        if (($_SESSION[$this->session_key . '_expiration'] - time()) >= $this->expiration) {
+        if ((time() - $_SESSION[$this->session_key . '_expiration']) <= $this->expiration) {
             return false;
         }
         return true;
