@@ -2,6 +2,8 @@
 
 A place where I store code I find useful. 
 
+#### Links may not be up-to-date, please check the proper paths before utilizing.
+
 # PHP
 
 ### [PHP Function for Executing Prepared Statements with Named Parameters](https://github.com/User00092/useful_code/blob/fcd7951a74ec97ea6b61cc7c1fbf4a408aebfb58/php/named_param_executor.php)
@@ -87,7 +89,7 @@ if ($encryptedDataWithIV !== null) {
 
 
 
-### [ PHP CSRF Protection Class](https://github.com/User00092/useful_code/blob/2dd69cec39e4b89a76c5eb403a2ebef28d86a0a1/php/CSRFProtection.php)
+### [PHP CSRF Protection Class](https://github.com/User00092/useful_code/blob/8bc2931317d5866345214b37d4cc1ea868aeaa5a/php/CSRFProtection.php)
 
 ```php
 new CSRFProtection();
