@@ -10,7 +10,7 @@ function executeWithNamedParameters(\mysqli $conn, string $sql, array $namedValu
         if (str_starts_with($part, ":")) {
             $newSQL .= " ?";
 
-            If (!isset($namedValues[$part]) {
+            If (!isset($namedValues[$part])) {
                 throw new \Exception("Error retrieving the key: \"$part\"");
             }
 
