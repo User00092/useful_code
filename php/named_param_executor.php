@@ -10,13 +10,13 @@ function executeWithNamedParameters(\mysqli $conn, string $sql, array $namedValu
         if (str_starts_with($part, ":")) {
             $newSQL .= " ?";
 
-            $value = $namedValues[$part] ?? null;
-
-            if ($value == null) {
+            If (!isset($namedValues[$part]) {
                 throw new \Exception("Error retrieving the key: \"$part\"");
             }
 
+            $value = $namedValues[$part];
             $listValues[] = $value;
+
             if (is_int($value)) {
                 $listValuesTypes .= 'i';
             } else if (is_double($value)) {
