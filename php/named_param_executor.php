@@ -3,6 +3,9 @@ function executeWithNamedParameters(\mysqli $conn, string $sql, array $namedValu
     $listValues = [];
     $listValuesTypes = '';
 
+    $sql = str_replace(":", " :", $sql);
+    preg_replace('/([^a-zA-Z0-9])+$/', ' $1', $sql);
+
     $parts = explode(' ', $sql);
     foreach ($parts as $part) {
         $part = trim($part);
@@ -13,6 +16,7 @@ function executeWithNamedParameters(\mysqli $conn, string $sql, array $namedValu
             If (!isset($namedValues[$part])) {
                 throw new \Exception("Error retrieving the key: \"$part\"");
             }
+
 
             $value = $namedValues[$part];
             $listValues[] = $value;
@@ -29,6 +33,8 @@ function executeWithNamedParameters(\mysqli $conn, string $sql, array $namedValu
             $newSQL .= " " . $part;
         }
     }
+
+    $newSQL = str_replace('  ', ' ', $newSQL);
 
     $stmt = $conn->prepare($newSQL);
     if (!$stmt) {
