@@ -6,7 +6,7 @@ A place where I store code I find useful.
 
 # PHP
 
-### [PHP Function for Executing Prepared Statements with Named Parameters](https://github.com/User00092/useful_code/blob/eecc7f962531413f74631ebe11f6c24e77e52908/php/named_param_executor.php)
+### [PHP Function for Executing Prepared Statements with Named Parameters](https://github.com/User00092/useful_code/blob/ead2b1ce3d4d8ef99edb77a5ed012f85a7140473/php/named_param_executor.php)
 
 ```php
 executeWithNamedParameters();
