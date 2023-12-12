@@ -3,8 +3,7 @@ function executeWithNamedParameters(\mysqli $conn, string $sql, array $namedValu
     $listValues = [];
     $listValuesTypes = '';
 
-    $sql = str_replace(":", " :", $sql);
-    preg_replace('/([^a-zA-Z0-9])+$/', ' $1', $sql);
+    $sql = preg_replace('/([(),=])+/', ' $1 ', $sql);
 
     $parts = explode(' ', $sql);
     foreach ($parts as $part) {
