@@ -48,7 +48,7 @@ class CSRFProtection {
         if ($_SESSION[$this->session_key] !== $token) {
             return false;
         }
-        if ((time() - $_SESSION[$this->session_key . '_expiration']) <= $this->expiration) {
+        if (($_SESSION[$this->session_key . '_expiration'] - time()) <= 0) {
             return false;
         }
         return true;
