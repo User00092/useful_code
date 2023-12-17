@@ -7,7 +7,7 @@ class AES256 {
 
     public function __construct(string $key) {
         if (strlen($key) !== self::AES256_KEY_SIZE) {
-            throw new \Exception('Key size must be 32 bytes.');
+            throw new \Exception('Key size must be ' . self::AES256_KEY_SIZE . ' bytes.');
         }
 
         $this->key = $key;
@@ -24,6 +24,10 @@ class AES256 {
     }
 
     public function encryptWithIV(string $plaintext, string $nonce): string | null {
+        if (strlen(base64_decode($nonce)) !== self::AES256_NONCE_SIZE) {
+            throw new \Exception('Nonce size must be ' . self::AES256_NONCE_SIZE . ' bytes.');
+        }
+
         try {
             $nonce = base64_decode($nonce);
             $ciphertext = openssl_encrypt($plaintext, self::AES256_MODE, $this->key, OPENSSL_RAW_DATA, $nonce, $tag);
@@ -41,7 +45,7 @@ class AES256 {
             $tag = substr($ciphertext, self::AES256_NONCE_SIZE, $tagLength);
             $encryptedData = substr($ciphertext, self::AES256_NONCE_SIZE + $tagLength);
             return openssl_decrypt($encryptedData, self::AES256_MODE, $this->key, OPENSSL_RAW_DATA, $iv, $tag);
-        } catch (\Exception) {
+        } catch (\Exception $ex) {
             return null;
         }
     }
