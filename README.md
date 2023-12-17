@@ -28,7 +28,7 @@ $accountQuery = executeWithNamedParameters($conn, "SELECT * FROM table WHERE ema
 
 
 
-### [PHP AES-256 Encryption and Decryption Class](https://github.com/User00092/useful_code/blob/fed3b7b2d40730dd69252948bf7653188dd67458/php/AES256.php)
+### [PHP AES-256 Encryption and Decryption Class](https://github.com/User00092/useful_code/blob/28cdcc1bf5e4e039623bd320f4b4d2fe51b67ed2/php/AES256.php)
 
 ```php
 new AES256();
