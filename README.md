@@ -137,7 +137,7 @@ echo "Meta Token Tag: $metaTokenTag\n";
 
 # Python
 
-### [Time-Based Points Calculation](https://github.com/User00092/useful_code/blob/cf65be1c6de31cdd4fd0c0ddd8d8fd98a1ca12e8/Python/time_based_point_calculation.py)
+### [Time-Based Points Calculation](https://github.com/User00092/useful_code/blob/0df17a62373bb549d9435fdaf5ddada2c3b021e0/Python/time_based_point_calculation.py)
 ```py
 calculate_points(max_points: float, min_points: float, max_time: float, time_taken: float, reverse: bool = False)
 ```
