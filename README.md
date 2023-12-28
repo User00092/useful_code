@@ -139,27 +139,32 @@ echo "Meta Token Tag: $metaTokenTag\n";
 
 ### [Time-Based Points Calculation](https://github.com/User00092/useful_code/blob/cf65be1c6de31cdd4fd0c0ddd8d8fd98a1ca12e8/Python/time_based_point_calculation.py)
 ```py
-calculate_points(max_points: float, min_points: float, max_time: float, time_taken: float)
+calculate_points(max_points: float, min_points: float, max_time: float, time_taken: float, reverse: bool = False)
 ```
 
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `max_points` | `float` | Determines the maximum points allowed |
+| Parameter | Type     | Description                | Default |
+| :-------- | :------- | :------------------------- | :------ |
+| `max_points` | `float` | Determines the maximum points allowed | 
 | `min_points` | `float` | Determines the minimum points allowed |
 | `max_time` | `float` | Determines the maximum time allowed |
 | `time_taken` | `float` | Determine the time to be used in calculation |
+| `reverse` | `bool` | Determines if longer times should be awarded more points | `False` |
 ##### Example:
 ```py
 import time
 
-def calculate_points(max_points: float, min_points: float, max_time: float, time_taken: float):
+def calculate_points(max_points: float, min_points: float, max_time: float, time_taken: float, reverse: bool = False):
     if time_taken <= 0:
-        return max_points
+        return max_points if not reverse else min_points
     elif time_taken >= max_time:
-        return min_points
+        return min_points if not reverse else max_points
     else:
-        slope = (max_points - min_points) / max_time
-        return max_points - slope * time_taken
+        if not reverse:
+            slope = (max_points - min_points) / max_time
+            return max_points - slope * time_taken
+        else:
+            slope = (max_points - min_points) / max_time
+            return min_points + slope * time_taken
 
 
 
