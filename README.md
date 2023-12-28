@@ -135,4 +135,49 @@ echo "Meta Token Tag: $metaTokenTag\n";
 
 ```
 
+# Python
+
+### [Time-Based Points Calculation](https://github.com/User00092/useful_code/blob/cf65be1c6de31cdd4fd0c0ddd8d8fd98a1ca12e8/Python/time_based_point_calculation.py)
+```py
+calculate_points(max_points: float, min_points: float, max_time: float, time_taken: float)
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `max_points` | `float` | Determines the maximum points allowed |
+| `min_points` | `float` | Determines the minimum points allowed |
+| `max_time` | `float` | Determines the maximum time allowed |
+| `time_taken` | `float` | Determine the time to be used in calculation |
+##### Example:
+```py
+import time
+
+def calculate_points(max_points: float, min_points: float, max_time: float, time_taken: float):
+    if time_taken <= 0:
+        return max_points
+    elif time_taken >= max_time:
+        return min_points
+    else:
+        slope = (max_points - min_points) / max_time
+        return max_points - slope * time_taken
+
+
+
+def do_something():
+    print("Doing something")
+    time.sleep(4.000922)
+    print("Done")
+    
+
+def score_function_time(function, *args, **kwargs):
+    start_time = time.time()
+    function(*args, **kwargs)
+    time_taken = time.time() - start_time
+    
+    points = calculate_points(100, 0, 5, time_taken)
+    print(points)
+
+
+score_function_time(do_something)
+```
 
